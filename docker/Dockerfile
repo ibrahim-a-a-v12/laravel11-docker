@@ -14,6 +14,9 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install zip \
     && docker-php-ext-install pdo pdo_mysql  # Add this line to install PDO MySQL
 
+# Change PHP memory limit to 1GB
+RUN sed -i 's/^memory_limit = .*/memory_limit = 1024M/' /etc/php8/php.ini
+
 # Set the working directory
 COPY ./src /var/www/html
 WORKDIR /var/www/html
